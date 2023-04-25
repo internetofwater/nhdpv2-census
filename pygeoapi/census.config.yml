@@ -55,18 +55,17 @@ logging:
 
 metadata:
   identification:
-    title: NHGF Census Intersection
-    description: National Hydrologic Geospatial Fabric (NHGF) and Census intersection
+    title: NHDPlusV2 Census Intersection
+    description: National Hydrography Dataset Plus (NHDPlusV2) with Census intersection
     keywords: &keywords
+      - nhgfpv2
       - geofabric
       - hydrography
       - census geography
       - census
-      - nhgf
       - iow
       - geospatial
       - api
-      - pygeoapi
     keywords_type: theme
     terms_of_service: https://creativecommons.org/licenses/by/4.0/
     url: https://github.com/internetofwater/nhgf-census
@@ -91,15 +90,15 @@ metadata:
 resources:
   "2000":
     type: collection
-    title: NHGF 2000 Census Intersection
-    description: National Hydrologic Geospatial Fabric intersected with 2000 Census polygons
+    title: NHDPlusV2 for the 2000 Census
+    description: NHDPlusV2 intersected with 2000 Census polygons
     keywords: *keywords
     links:
       - &data-source
         type: application/html
         rel: canonical
         title: data source
-        href: https://storage.googleapis.com/nhgf/2000Censuspoly.gpkg
+        href: https://storage.googleapis.com/nhgf/2000CensusPolys.gpkg
         hreflang: en-US
     extents: &extents
       spatial:
@@ -117,31 +116,31 @@ resources:
           dbname: ${POSTGRES_DB}
           user: ${POSTGRES_USER}
           password: ${POSTGRES_PASSWORD}
-        table: 2000censuspoly
-        id_field: objectid
+        table: 2000censuspolys
+        id_field: id
         uri_field: uri
         geom_field: shape
   "2010":
     type: collection
-    title: NHGF 2010 Census Intersection
-    description: National Hydrologic Geospatial Fabric intersected with 2010 Census polygons
+    title: NHDPlusV2 for the 2010 Census
+    description: NHDPlusV2 intersected with 2010 Census polygons
     keywords: *keywords
     links:
       - <<: *data-source
-        href: https://storage.googleapis.com/nhgf/2010CensusPoly.gpkg
+        href: https://storage.googleapis.com/nhgf/2010CensusPolys.gpkg
     extents: *extents
     providers:
       - <<: *provider
-        table: 2010censuspoly
+        table: 2010censuspolys
   "2020":
     type: collection
-    title: NHGF 2020 Census Intersection
-    description: National Hydrologic Geospatial Fabric intersected with 2020 Census polygons
+    title: NHDPlusV2 for the 2020 Census
+    description: NHDPlusV2 intersected with 2020 Census polygons
     keywords: *keywords
     links:
       - <<: *data-source
-        href: https://storage.googleapis.com/nhgf/2020Censuspoly.gpkg
+        href: https://storage.googleapis.com/nhgf/2020CensusPolys.gpkg
     extents: *extents
     providers:
       - <<: *provider
-        table: 2020censuspoly
+        table: 2020censuspolys
