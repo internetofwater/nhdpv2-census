@@ -46,8 +46,8 @@ server:
     url: https://tile.openstreetmap.org/{z}/{x}/{y}.png
     attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>'
   # templates:
-  # path: /path/to/Jinja2/templates
-  # static: /path/to/static/folder # css/js/img
+  #   path: /path/to/Jinja2/templates
+  #   static: /path/to/static/folder # css/js/img
   # ogc_schemas_location: /opt/schemas.opengis.net
 
 logging:
@@ -55,9 +55,12 @@ logging:
 
 metadata:
   identification:
-    title: NHGF fabric with pygeoapi
-    description: NHGF fabric with pygeoapi
+    title: NHGF Census Intersection
+    description: National Hydrologic Geospatial Fabric (NHGF) and Census intersection
     keywords: &keywords
+      - geofabric
+      - hydrography
+      - census geography
       - census
       - nhgf
       - iow
@@ -66,7 +69,7 @@ metadata:
       - pygeoapi
     keywords_type: theme
     terms_of_service: https://creativecommons.org/licenses/by/4.0/
-    url: https://github.com/internetofwater/geoconnex.us
+    url: https://github.com/internetofwater/nhgf-census
   license:
     name: CC-BY 4.0 license
     url: https://creativecommons.org/licenses/by/4.0/
@@ -86,16 +89,17 @@ metadata:
     role: pointOfContact
 
 resources:
-  Census-Points-2020:
+  "2000":
     type: collection
-    title: NHGF Census Points 2020
-    description: NHGF Census Points 2020
+    title: NHGF 2000 Census Intersection
+    description: National Hydrologic Geospatial Fabric intersected with 2000 Census polygons
     keywords: *keywords
     links:
-      - type: application/html
+      - &data-source
+        type: application/html
         rel: canonical
         title: data source
-        href: https://cgsfilestore.blob.core.windows.net/publicshare/2020Censuspts.gpkg
+        href: https://storage.googleapis.com/nhgf/2000Censuspoly.gpkg
         hreflang: en-US
     extents: &extents
       spatial:
@@ -105,53 +109,39 @@ resources:
         begin: null
         end: null
     providers:
-      - type: feature
+      - &provider
+        type: feature
         name: PostgreSQL
-        data: &provider-data
+        data:
           host: ${POSTGRES_HOST}
           dbname: ${POSTGRES_DB}
           user: ${POSTGRES_USER}
           password: ${POSTGRES_PASSWORD}
+        table: 2000censuspoly
         id_field: objectid
-        table: 2020censuspts
-        # uri_field: uri
+        uri_field: uri
         geom_field: shape
-  Census-Blocks-2020:
+  "2010":
     type: collection
-    title: NHGF Census Blocks 2020
-    description: NHGF Census Blocks 2020
+    title: NHGF 2010 Census Intersection
+    description: National Hydrologic Geospatial Fabric intersected with 2010 Census polygons
     keywords: *keywords
     links:
-      - type: application/html
-        rel: canonical
-        title: data source
-        href: https://cgsfilestore.blob.core.windows.net/publicshare/2020Censusblocks.gpkg
-        hreflang: en-US
+      - <<: *data-source
+        href: https://storage.googleapis.com/nhgf/2010CensusPoly.gpkg
     extents: *extents
     providers:
-      - type: feature
-        name: PostgreSQL
-        data: *provider-data
-        id_field: geoid20
-        table: 2020censusblocks
-        geom_field: shape
-  Census-Polygons-2020:
+      - <<: *provider
+        table: 2010censuspoly
+  "2020":
     type: collection
-    title: NHGF Census Polygons 2020
-    description: NHGF Census Polygons 2020
+    title: NHGF 2020 Census Intersection
+    description: National Hydrologic Geospatial Fabric intersected with 2020 Census polygons
     keywords: *keywords
     links:
-      - type: application/html
-        rel: canonical
-        title: data source
-        href: https://cgsfilestore.blob.core.windows.net/publicshare/2020Censuspoly.gpkg
-        hreflang: en-US
+      - <<: *data-source
+        href: https://storage.googleapis.com/nhgf/2020Censuspoly.gpkg
     extents: *extents
     providers:
-      - type: feature
-        name: PostgreSQL
-        data: *provider-data
-        id_field: objectid
+      - <<: *provider
         table: 2020censuspoly
-        # uri_field: uri
-        geom_field: shape
