@@ -1,4 +1,1 @@
 This script takes census data and intersects with NHD catchment data (v2) in ArcGIS Pro and creates files that were then uploaded to Google Cloud for Geoconnex. 2000, 2010, and 2020 are respectively slightly unique in their code due to differences with how the Census Bureau stored data.
-
-
-Wheeee
