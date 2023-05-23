@@ -181,10 +181,9 @@ class IntersectionProcessor(BaseProcessor):
             ]
         })
         LOGGER.debug(f'Making CQL query: {filter_}')
-        fc = provider.query(
-            limit=10000,
-            filterq=filter_
-        )
+        _ = provider.query(resulttype='hits', filterq=filter_)
+        fc = provider.query(limit=_['numberMatched'], filterq=filter_)
+
         LOGGER.info(f'Returning {fc["numberReturned"]} intersections')
         return fc
 
