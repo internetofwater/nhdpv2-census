@@ -13,8 +13,15 @@ There are many use cases within social and environmental science and policy for 
 
 ## Method
 
+Implementation code is in the `src` directory
+
 NHDPlusV2 Catchment Polygons were retrieved from the USGS National Hydrologic Geospatial Fabric (NHGF) Reference Hydrofabric [data release](https://www.sciencebase.gov/catalog/item/61295190d34e40dd9c06bcd7). 
 
-Census block polygons for 2000, 2010, 2020 were retrieved from the US Census Bureau Geographies ([TIGER/Line Shapefiles](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html)) program. 
+Census Block polygons for 2000, 2010, 2020 were retrieved from the US Census Bureau Geographies ([TIGER/Line Shapefiles](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html)) program. 
+
+For each year, the geospatial intersection of catchments and blocks was computed. Then for each intersection polygon, the following information was created:
+
+* an identifier of the form [] was constructed
+* 
 
 For each census year, 
