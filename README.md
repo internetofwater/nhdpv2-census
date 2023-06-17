@@ -33,9 +33,9 @@ This information, combined with the population estimate from the US Census for t
 
 ### Bulk download
 
-https://storage.googleapis.com/nhgf/2000CensusPolys.gpkg
-https://storage.googleapis.com/nhgf/2010CensusPolys.gpkg
-https://storage.googleapis.com/nhgf/2020CensusPolys.gpkg
+* https://storage.googleapis.com/nhgf/2000CensusPolys.gpkg
+* https://storage.googleapis.com/nhgf/2010CensusPolys.gpkg
+* https://storage.googleapis.com/nhgf/2020CensusPolys.gpkg
 
 ### API Access
 
