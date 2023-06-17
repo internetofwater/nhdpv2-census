@@ -21,7 +21,45 @@ Census Block polygons for 2000, 2010, 2020 were retrieved from the US Census Bur
 
 For each year, the geospatial intersection of catchments and blocks was computed. Then for each intersection polygon, the following information was created:
 
-* an identifier of the form [] was constructed
-* 
+* an identifier of the form https://geoconnex.us/iow/nhdpv2-census/(2000|2010|2020)/comid/{NHDPlusV2 ComID}/block/{Census Block GEOID} was constructed
+* The area of the orginal census block
+* The area of the original catchment polygon
+* The % area of the original census block covered by the intersection
+* THe % area of the orginal catchment polygon covered by the intersection
 
-For each census year, 
+This information, combined with the population estimate from the US Census for the year of choice, is sufficient to construct [population-area weightings]() to summarize arbitrary census variables for arbitrary collections of census block intersctions that correspond to arbitrary hydrographies made up of NHDPlusV2 Catchments. 
+
+## Data Availability
+
+### Bulk download
+
+https://storage.googleapis.com/nhgf/2000CensusPolys.gpkg
+https://storage.googleapis.com/nhgf/2010CensusPolys.gpkg
+https://storage.googleapis.com/nhgf/2020CensusPolys.gpkg
+
+### API Access
+
+#### OGC-API Features
+
+For each year, a collection at https://nhdpv2-census.geoconnex.dev/collections is available. 
+
+#### OGC-API Process for intersection by reference
+
+A tool is available to return a GeoJSON feature collection consisting of all intersection polygons for the desired Census decade and a polygon supplied as geojson via a url.
+
+The tool is available as an OGC-API Process at https://nhdpv2-census.geoconnex.dev/processes/intersector 
+
+For example
+
+```
+curl -X 'POST' \
+  'https://nhdpv2-census.geoconnex.dev/processes/intersector/execution' \
+  --compressed \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "inputs": {
+    "url": "https://geoconnex.us/ref/pws/NC0241010"
+  }
+}
+```
+
