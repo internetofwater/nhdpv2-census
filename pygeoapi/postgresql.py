@@ -176,6 +176,9 @@ class PostgreSQLProvider(BaseProvider):
                        .offset(offset))
 
             try:
+                if filterq:
+                    raise ProviderQueryError('No Psuedo-count during CQL')
+
                 LOGGER.debug('Getting pseudo-count')
                 compiled = results.statement.compile(
                     self._engine, compile_kwargs={"literal_binds": True})
@@ -497,3 +500,6 @@ class PostgreSQLProvider(BaseProvider):
         else:
             crs_transform = None
         return crs_transform
+
+    def __repr__(self):
+        return f'<PostgreSQLProvider> {self.table}'
